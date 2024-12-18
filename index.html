@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayFinder</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="shortcut icon" href="images/chateau.png" type="image/x-icon">
+
+    <!--Tailwind css-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+</head>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: "Poppins", sans-serif;
+    }
+
+    #home {
+        position: relative;
+    }
+
+    /* Navbar styles */
+    .navbar-container {
+        background: transparent;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .navbar-container.fixed {
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Fond noir avec opacité */
+        padding-top: 8px;
+        padding-bottom: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar a {
+        transition: color 0.3s;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    .animate-scroll {
+        animation: scroll 10s linear infinite;
+    }
+</style>
+
+<body>
+    <section id="home" class="bg-cover bg-center h-[100vh]" style="background-image: url('images/hero.jpeg');">
+        <div id="navbar" class="navbar-container fixed top-0 left-0 w-full z-20">
+            <nav class="navbar flex items-center justify-between px-[5%] py-4 relative">
+                <!-- Navbar Header -->
+                <div class="navbar-header flex items-center">
+                    <!-- Bouton Hamburger -->
+                    
+                    <!-- Logo -->
+                    <a class="navbar-brand text-3xl capitalize font-bold text-blue-500 ml-4 md:ml-0"
+                        style="font-family: 'Alex Brush', sans-serif;" href="index.html">
+                        StayFinder
+                    </a>
+                </div>
+        
+                <!-- Navigation Links -->
+                <div id="menu" class="hidden flex-col md:flex md:flex-row md:space-x-6 absolute md:relative top-[100%] left-0 w-full h-auto md:w-auto bg-gray-800 md:bg-transparent text-left md:text-left transition-all duration-300 ease-in-out shadow-lg md:shadow-none md:space-y-0 space-y-4">
+                    <a href="#home" class="text-white hover:text-blue-500 block px-4 py-2">Accueil</a>
+                    <a href="#service" class="text-white hover:text-blue-500 block px-4 py-2">Services</a>
+                    <a href="#featured" class="text-white hover:text-blue-500 block px-4 py-2">Locations populaires</a>
+                    <a href="#blog" class="text-white hover:text-blue-500 block px-4 py-2">Blog</a>
+                    <a href="#contact" class="text-white hover:text-blue-500 block px-4 py-2">Contact</a>
+                </div>
+
+                 <!-- Search Icon -->
+                 <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-gray-300 hover:text-blue-500 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 4a6 6 0 016 6c0 1.4-.448 2.691-1.207 3.759l4.272 4.273a1 1 0 01-1.415 1.414l-4.272-4.272A5.972 5.972 0 0110 16a6 6 0 110-12z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <button id="menu-toggle" class="md:hidden text-gray-300 focus:outline-none relative z-20">
+                    <img src="images/menu.png" alt="Menu" width="30px" height="30px">
+                </button>
+            </nav>
+        </div>  
+
+        <div class="container mx-auto text-center py-20 text-white mt-16">
+            <div class="welcome-hero-txt">
+                <h1 class="text-4xl md:text-5xl uppercase font-bold mb-6 leading-tight">Obtenez l'emplacement souhaité à un prix raisonnable
+                </h1>
+                <p class="text-lg mb-8">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                    <br> incididunt ut labore et dolore magna aliqua.
+                </p>
+                <button class="bg-blue-500 text-white px-6 py-3 mt-4 rounded hover:bg-blue-600">Contactez-nous</button>
+            </div>
+        </div>
+
+        <div class="container mx-auto bg-white shadow-lg p-6 rounded mt-[10%]">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div>
+                    <h2 class="text-gray-700 font-semibold mb-2">Destination</h2>
+                    <select
+                        class="form-select block w-full px-3 py-2 border border-gray-300 rounded focus:ring focus:ring-blue-200">
+                        <option value="default">Sélectionnez une destination</option>
+                        <option value="paris">Paris</option>
+                        <option value="new-york">New York</option>
+                        <option value="dubai">Dubaï</option>
+                        <option value="bali">Bali</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h2 class="text-gray-700 font-semibold mb-2">Type de propriété</h2>
+                    <select
+                        class="form-select block w-full px-3 py-2 border border-gray-300 rounded focus:ring focus:ring-blue-200">
+                        <option value="default">Type de propriété</option>
+                        <option value="villa">Villa</option>
+                        <option value="chambre">Chambre</option>
+                        <option value="studio">Studio</option>
+                        <option value="appartement">Appartement</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h2 class="text-gray-700 font-semibold mb-2">Dates</h2>
+                    <input type="date"
+                        class="form-input block w-full px-3 py-2 border border-gray-300 rounded focus:ring focus:ring-blue-200">
+                </div>
+
+                <div>
+                    <h2 class="text-gray-700 font-semibold mb-2">Budget</h2>
+                    <select
+                        class="form-select block w-full px-3 py-2 border border-gray-300 rounded focus:ring focus:ring-blue-200">
+                        <option value="default">Budget</option>
+                        <option value="50-100">50€ - 100€</option>
+                        <option value="100-200">100€ - 200€</option>
+                        <option value="200-500">200€ - 500€</option>
+                        <option value="500+">500€ et plus</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-center items-center">
+                    <button class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600">Rechercher</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="service" class="service py-6 mt-8 sm:py-8 sm:mt-[10%] md:py-10 md:mt-[12%] lg:py-8 lg:mt-[10%]">
+        <div class="container mx-auto">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div
+                        class="flex flex-col items-center bg-white shadow-base p-6 border border-gray-200 rounded hover:bg-blue-500 transition duration-300 group">
+                        <div class="single-service-icon text-blue-500 text-4xl mb-4 group-hover:text-white">
+                            <img src="images/reserve.png" alt="" width="100px" height="100px"
+                                class="group-hover:brightness-0 group-hover:invert">
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mt-4 group-hover:text-white">
+                            <a href="#">Réservation Simple et Rapide</a>
+                        </h2>
+                        <p class="text-gray-600 text-center mt-4 mb-6 group-hover:text-white">
+                            Réservez en quelques clics une villa ou une chambre adaptée à vos besoins.
+                        </p>
+                        <div class="mt-6">
+                            <hr class="w-16 border-b-2 border-blue-500 mx-auto group-hover:border-white">
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center bg-white shadow-base p-6 border border-gray-200 rounded hover:bg-blue-500 transition duration-300 group">
+                        <div class="single-service-icon text-blue-500 text-4xl mb-4 group-hover:text-white">
+                            <img src="images/maison.png" alt="" width="100px" height="100px"
+                                class="group-hover:brightness-0 group-hover:invert">
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mt-4 group-hover:text-white">
+                            <a href="#">Propriétés Uniques et Variées</a>
+                        </h2>
+                        <p class="text-gray-600 text-center mt-4 mb-6 group-hover:text-white">
+                            Découvrez des villas de luxe, des appartements modernes et des chambres confortables.
+                        </p>
+                        <div class="mt-6">
+                            <hr class="w-16 border-b-2 border-blue-500 mx-auto group-hover:border-white">
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center bg-white shadow-base p-6 border border-gray-200 rounded hover:bg-blue-500 transition duration-300 group">
+                        <div class="single-service-icon text-blue-500 text-4xl mb-4 group-hover:text-white">
+                            <img src="images/service-clients.png" alt="" width="100px" height="100px"
+                                class="group-hover:brightness-0 group-hover:invert">
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mt-4 group-hover:text-white">
+                            <a href="#">Assistance 24/7</a>
+                        </h2>
+                        <p class="text-gray-600 text-center mt-4 mb-6 group-hover:text-white">
+                            Un support client disponible pour répondre à toutes vos questions à tout moment.
+                        </p>
+                        <div class="mt-6">
+                            <hr class="w-16 border-b-2 border-blue-500 mx-auto group-hover:border-white">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="featured" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-blue-500 uppercase font-semibold mb-4">Découvrez</p>
+                <h2 class="text-4xl font-bold text-gray-800">Location en vedette</h2>
+                <div class="mt-6">
+                    <hr class="w-16 border-b-2 border-blue-500 mx-auto">
+                </div>
+            </div>
+            <div class="swiper" id="new-cars-carousel">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div class="new-cars-img">
+                                <img src="images/gal-10.jpeg" alt="marrakech" class="w-full rounded-lg shadow-lg" />
+                            </div>
+                            <div class="new-cars-txt">
+                                <h3 class="text-2xl font-semibold text-gray-800">Appartement Luxe</h3>
+                                <p class="text-gray-500 text-sm mt-2">Paris, France</p>
+                                <p class="text-gray-700 mt-4">
+                                    Profitez d'une vue imprenable sur la tour Eiffel dans cet appartement luxueux. Idéal
+                                    pour un
+                                    séjour romantique ou professionnel.
+                                </p>
+
+                                <p class="text-gray-700 mt-12">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo adipisci ipsa alias
+                                    blanditiis
+                                    itaque fuga incidunt iste a, maiores ducimus enim, ipsum impedit, accusantium
+                                    molestiae.
+                                </p>
+                                <div class="flex items-center mt-4">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-500 text-sm ml-2">(4.0)</span>
+                                </div>
+                                <div class="mt-10">
+                                    <a href="#"
+                                        class="px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold">Voir
+                                        Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div class="new-cars-img">
+                                <img src="images/gal-4.jpeg" alt="maroc" class="w-full rounded-lg shadow-lg" />
+                            </div>
+                            <div class="new-cars-txt">
+                                <h3 class="text-2xl font-semibold text-gray-800">Appartement Luxe</h3>
+                                <p class="text-gray-500 text-sm mt-2">Paris, France</p>
+                                <p class="text-gray-700 mt-4">
+                                    Profitez d'une vue imprenable sur la tour Eiffel dans cet appartement luxueux. Idéal
+                                    pour un
+                                    séjour romantique ou professionnel.
+                                </p>
+
+                                <p class="text-gray-700 mt-12">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo adipisci ipsa alias
+                                    blanditiis
+                                    itaque fuga incidunt iste a, maiores ducimus enim, ipsum impedit, accusantium
+                                    molestiae.
+                                </p>
+                                <div class="flex items-center mt-4">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-500 text-sm ml-2">(4.0)</span>
+                                </div>
+                                <div class="mt-10">
+                                    <a href="#"
+                                        class="px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold">Voir
+                                        Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div class="new-cars-img">
+                                <img src="images/gal-7.jpeg" alt="malaga" class="w-full rounded-lg shadow-lg" />
+                            </div>
+                            <div class="new-cars-txt">
+                                <h3 class="text-2xl font-semibold text-gray-800">Appartement Luxe</h3>
+                                <p class="text-gray-500 text-sm mt-2">Bruxelles, Belgique</p>
+                                <p class="text-gray-700 mt-4">
+                                    Profitez d'une vue imprenable sur la tour Eiffel dans cet appartement luxueux. Idéal
+                                    pour un
+                                    séjour romantique ou professionnel.
+                                </p>
+
+                                <p class="text-gray-700 mt-12">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo adipisci ipsa alias
+                                    blanditiis
+                                    itaque fuga incidunt iste a, maiores ducimus enim, ipsum impedit, accusantium
+                                    molestiae.
+                                </p>
+                                <div class="flex items-center mt-4">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.428 8.332 1.209-6.034 5.884 1.425 8.292L12 18.896l-7.391 3.904 1.425-8.292-6.034-5.884 8.332-1.209z" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-gray-500 text-sm ml-2">(4.0)</span>
+                                </div>
+                                <div class="mt-10">
+                                    <a href="#"
+                                        class="px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold">Voir
+                                        Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-button-next text-gray-700"></div>
+                <div class="swiper-button-prev text-gray-700"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto py-16 px-6 sm:px-8 lg:px-10 text-center">
+        <div class="block mb-4 mt-12 mx-auto  pb-2 max-w-[360px]">
+            <h1>Nos Locations</h1>
+            <div class="mt-6">
+                <hr class="w-16 border-b-2 border-blue-500 mx-auto">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4
+         mt-10">
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/gal-1.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        5.0
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/house-3.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        4.8
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/7ca6118f-68c7-4a32-8bbc-09ce1840a373.webp" alt="Wooden House"
+                        class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        5.0
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/gal-12.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        4.8
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/gal-3.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        5.0
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/gal-9.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        4.8
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/malaga.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        5.0
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-base">
+                <div class="relative mx-4 mt-4 overflow-hidden text-white shadow-md rounded-xl bg-blue-gray-500">
+                    <img src="images/marbella.jpeg" alt="Wooden House" class="w-full h-40 object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    <button class="absolute top-4 right-4 h-8 w-8 rounded-full text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path
+                                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h5 class="text-lg font-medium text-blue-gray-900 text-left">Wooden House, Florida</h5>
+                    <p class="text-blue-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        4.8
+                    </p>
+                    <p class="text-gray-700 text-sm text-left">
+                        Enter a freshly updated and thoughtfully furnished peaceful home
+                    </p>
+                    <button
+                        class="w-full mt-4 rounded-lg bg-blue-500 py-2 text-white text-sm font-bold hover:bg-blue-800">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="blog" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6 mt-4 py-6">
+            <div class="text-center mb-12">
+                <p class="text-blue-500 font-500 uppercase mb-4">Notre Blog</p>
+                <h2 class="text-4xl font-500 text-gray-800 mb-6">Derniers articles</h2>
+                <div class="mt-4">
+                    <hr class="w-16 border-b-2 border-blue-500 mx-auto">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div
+                    class="bg-white shadow-md rounded overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <img class="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
+                            src="images/house-1.jpeg" alt="Article 1">
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-xl font-semibold text-gray-800 group-hover:text-blue-500 transition-colors duration-300">
+                            Les meilleures destinations pour 2024</h3>
+                        <p class="text-gray-500 text-sm mt-2">Publié le 12 décembre 2024</p>
+                        <p class="text-gray-700 mt-4">
+                            Découvrez les destinations les plus tendances à visiter en 2024 et préparez vos valises dès
+                            maintenant !
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="text-blue-500 hover:text-blue-600 font-semibold">Lire la suite &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white shadow-md rounded overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <img class="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
+                            src="images/house-2.jpeg" alt="Article 2">
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-xl font-semibold text-gray-800 group-hover:text-blue-500 transition-colors duration-300">
+                            Comment choisir la location idéale</h3>
+                        <p class="text-gray-500 text-sm mt-2">Publié le 10 décembre 2024</p>
+                        <p class="text-gray-700 mt-4">
+                            Un guide pratique pour trouver la location parfaite pour vos vacances ou déplacements
+                            professionnels.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="text-blue-500 hover:text-blue-600 font-semibold">Lire la suite &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white shadow-md rounded overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <img class="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
+                            src="images/lagos,port.jpg" alt="Article 3">
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-xl font-semibold text-gray-800 group-hover:text-blue-500 transition-colors duration-300">
+                            10 astuces pour économiser en voyage</h3>
+                        <p class="text-gray-500 text-sm mt-2">Publié le 8 décembre 2024</p>
+                        <p class="text-gray-700 mt-4">
+                            Apprenez comment voyager malin et économiser de l'argent tout en profitant de vos vacances.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="text-blue-500 hover:text-blue-600 font-semibold">Lire la suite &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white shadow-md rounded overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg group">
+                    <div class="relative overflow-hidden">
+                        <img class="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
+                            src="images/budens.jpg" alt="Article 2">
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-xl font-semibold text-gray-800 group-hover:text-blue-500 transition-colors duration-300">
+                            Comment choisir la location idéale</h3>
+                        <p class="text-gray-500 text-sm mt-2">Publié le 10 décembre 2024</p>
+                        <p class="text-gray-700 mt-4">
+                            Un guide pratique pour trouver la location parfaite pour vos vacances ou déplacements
+                            professionnels.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="text-blue-500 hover:text-blue-600 font-semibold">Lire la suite &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients-say" class="bg-gray-100 py-10">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-12 mt-10">
+                <h2 class="text-2xl font-semibold text-gray-800">What Our Clients Say</h2>
+                <p class="text-gray-600 mt-4">See what our happy clients have to say about our services.</p>
+                <div class="mt-6">
+                    <hr class="w-16 border-b-2 border-blue-500 mx-auto">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="images/c1.png" alt="Client Image" class="w-16 h-16 rounded-full">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Tomas Lili</h3>
+                            <p class="text-sm text-gray-500">New York</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan rem aperiam,
+                        eaque ipsa quae ab illo inventore verit."
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="images/c2.png" alt="Client Image" class="w-16 h-16 rounded-full">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Romi Rain</h3>
+                            <p class="text-sm text-gray-500">London</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan rem aperiam,
+                        eaque ipsa quae ab illo inventore verit."
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="images/c3.png" alt="Client Image" class="w-16 h-16 rounded-full">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">John Doe</h3>
+                            <p class="text-sm text-gray-500">Washington</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan rem aperiam,
+                        eaque ipsa quae ab illo inventore verit."
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="partners" class="bg-gray-100 py-12 flex justify-center items-center text-center">
+        <div class="container mx-auto py-8">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-semibold text-gray-800">Nos Partenaires</h2>
+                <div class="mt-4">
+                    <hr class="w-16 border-b-2 border-blue-500 mx-auto">
+                </div>
+            </div>
+
+            <div class="overflow-hidden">
+                <div id="partner-logos" class="flex items-center justify-center space-x-8 mx-auto">
+                    <img src="images/sponsors1.png" alt="Partner 1" class="h-8">
+                    <img src="images/sponsors2.png" alt="Partner 2" class="h-8">
+                    <img src="images/sponsors3.png" alt="Partner 3" class="h-8">
+                    <img src="images/sponsors4.png" alt="Partner 4" class="h-8">
+                    <img src="images/sponsors5.png" alt="Partner 5" class="h-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-blue-500">StayFinder</h2>
+                    <p class="mt-4 text-gray-400">
+                        Trouvez les meilleurs endroits pour séjourner.
+                    </p>
+                    <div class="mt-4">
+                        <p>Email : <a href="mailto:info@stayfinder.com" class="text-blue-400">info@stayfinder.com</a>
+                        </p>
+                        <p>Téléphone : <a href="tel:+123456789" class="text-blue-400">+1 (234) 567-890</a></p>
+                    </div>
+                </div>
+                <!-- Navigation Links -->
+                <div>
+                    <h3 class="text-lg font-semibold">Navigation</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-blue-400">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-blue-400">Services</a></li>
+                        <li><a href="#featured" class="text-gray-400 hover:text-blue-400">Locations populaires</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-400">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Popular Destinations -->
+                <div>
+                    <h3 class="text-lg font-semibold">Destinations populaires</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400">Paris</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400">Bali</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400">New York</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400">Tokyo</a></li>
+                    </ul>
+                </div>
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-lg font-semibold">Newsletter</h3>
+                    <p class="mt-4 text-gray-400">Abonnez-vous pour recevoir les dernières offres et actualités.</p>
+                    <div class="mt-4 flex">
+                        <input type="email" placeholder="Votre email"
+                            class="flex-1 px-4 py-2 rounded-l bg-gray-800 text-gray-400 focus:outline-none">
+                        <button class="px-4 py-2 bg-blue-500 text-white rounded-r hover:bg-blue-600">S'abonner</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Bottom -->
+            <div class="mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2024 StayFinder. Tous droits réservés.</p>
+                <div class="mt-4 md:mt-0 flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('fixed');
+            } else {
+                navbar.classList.remove('fixed');
+            }
+        });
+
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        });
+
+
+        const swiper = new Swiper('#new-cars-carousel', {
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            slidesPerView: 1,
+            spaceBetween: 20,
+        });
+    </script>
+
+</body>
+
+</html>
